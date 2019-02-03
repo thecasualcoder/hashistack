@@ -8,8 +8,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.cpus = 2
   end
   config.vm.provision :shell, inline: "echo 'Hello World!'"
-  config.vm.provision :shell, path: "./scripts/basic.sh"
-  config.vm.provision :shell, path: "./scripts/docker.sh"
+  config.vm.provision "basic", type: "shell", path: "./scripts/basic.sh"
+  config.vm.provision "docker", type: "shell", path: "./scripts/docker.sh"
+  config.vm.provision "consul", type: "shell", path: "./scripts/consul.sh"
+  config.vm.provision "nomad", type: "shell", path: "./scripts/nomad.sh"
 
   (1..NUM_OF_NODES).each do |i|
     config.vm.define "node#{i}" do |node|
