@@ -15,7 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   (1..NUM_OF_NODES).each do |i|
     config.vm.define "node#{i}" do |node|
-      node.vm.network "private_network", ip: "192.168.1.#{i+1}"
+      node.vm.hostname = "node#{i}"
+      node.vm.network "private_network", ip: "192.168.1.#{i+100}"
       node.vm.provision :shell, inline: "echo 'Hello from node#{i}'"
     end
   end
