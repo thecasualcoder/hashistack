@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "consul", type: "shell", path: "./scripts/consul.sh"
   config.vm.provision "nomad", type: "shell", path: "./scripts/nomad.sh"
 
-  (1..NUM_OF_NODES).each do |i|
+  NUM_OF_NODES.times do |i|
     config.vm.define "node#{i}" do |node|
       node.vm.hostname = "node#{i}"
       node.vm.network "private_network", ip: "192.168.1.#{i+100}"
