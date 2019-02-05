@@ -1,6 +1,8 @@
 #! /bin/sh
+
+set -e
+
 echo "Installing Nomad..."
-sudo apt-get update
 
 NOMAD_VERSION=0.8.7
 cd /tmp/
@@ -11,3 +13,8 @@ sudo mv nomad /usr/bin/nomad
 sudo mkdir -p /etc/nomad.d
 sudo chmod a+w /etc/nomad.d
 sudo rm -rf /tmp/nomad /tmp/nomad.zip
+
+echo "Installing http-echo"
+curl -sSL https://github.com/hashicorp/http-echo/releases/download/v0.2.3/http-echo_0.2.3_linux_amd64.zip -o http-echo.zip
+unzip http-echo.zip
+sudo mv http-echo /usr/local/bin

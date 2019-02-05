@@ -1,6 +1,5 @@
 #! /bin/sh
 echo "Installing Consul..."
-sudo apt-get update
 
 CONSUL_VERSION=1.4.0
 cd /tmp/
