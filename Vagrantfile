@@ -1,5 +1,5 @@
 VAGRANTFILE_API_VERSION = "2"
-NUM_OF_NODES = 3
+NUM_OF_NODES = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/xenial64"
@@ -19,5 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.network "private_network", ip: "192.168.1.#{i+100}"
       node.vm.provision :shell, inline: "echo 'Hello from node#{i}'"
     end
+  end
+
+  config.vm.define "systems" do |node|
+    node.vm.hostname = "systems"
+    node.vm.network "private_network", ip: "192.168.1.200"
+    node.vm.provision :shell, inline: "echo 'Hello from systems'"
   end
 end
