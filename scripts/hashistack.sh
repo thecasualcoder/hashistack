@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 set -e
 
@@ -9,8 +9,9 @@ function install_tool {
     echo "Installing ${TOOL}-${VERSION}..."
 
     cd /tmp/
+    sudo rm -rf /tmp/${TOOL} /tmp/${TOOL}.zip
     curl -sSL https://releases.hashicorp.com/${TOOL}/${VERSION}/${TOOL}_${VERSION}_linux_amd64.zip -o ${TOOL}.zip
-    unzip ${TOOL}.zip
+    unzip -o ${TOOL}.zip
     sudo chmod +x ${TOOL}
     sudo mv ${TOOL} /usr/bin/${TOOL}
     sudo mkdir -p /etc/${TOOL}.d
