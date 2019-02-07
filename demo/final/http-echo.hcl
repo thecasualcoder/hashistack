@@ -2,63 +2,67 @@ job "http-echo" {
   datacenters = ["dc1"]
   type = "service"
   
-	update {
+  update {
     max_parallel = 1
   }
 
   group "http-echo" {
     count = 2
     
-		task "http-echo" {
+    task "http-echo" {
       
-			driver = "exec"
+      driver = "exec"
       
-			config {
+      config {
         command = "http-echo"
         args = [
-        	"-text",
-          "Instance: ${NOMAD_ALLOC_INDEX} IP: ${NOMAD_ADDR_http} VERSION: ${NOMAD_META_VERSION} PASSWORD: ${PASSWORD}",
+          "-text",
+          "<h1>Instance: ${NOMAD_ALLOC_INDEX} IP: ${NOMAD_ADDR_http} PASSWORD: ${PASSWORD} Version: ${VERSION}</h1>",
           "-listen",
           "${NOMAD_ADDR_http}"
         ]
       }
 
-    	resources {
-      	memory = 200
+      env {
+        "VERSION" = "1"
+      }
 
-				network {
-      		port "http" {}
-      	}
-    	}
+      resources {
+        memory = 100
 
-			service {
-				port = "http"
-				name = "http-echo"
+        network {
+          port "http" {}
+        }
+      }
 
-				tags = [
-					"urlprefix-http-echo.service.consul/"
-					"urlprefix-/http-echo",
-				]
+      service {
+        port = "http"
+        name = "http-echo"
 
-				check {
-					type = "http"
-					path = "/health"
-					interval = "10s"
-					timeout = "2s"
-				}
-			}
+        tags = [
+          "urlprefix-http-echo.service.consul/",
+          "urlprefix-/http-echo strip=/http-echo"
+        ]
 
-			vault {
-				policies = ["http-echo"]
-			}
+        check {
+          type = "http"
+          path = "/health"
+          interval = "10s"
+          timeout = "2s"
+        }
+      }
 
-			template {
-  				data = <<EOH
+      vault {
+        policies = ["http-echo"]
+      }
+
+      template {
+          data = <<EOH
 PASSWORD="{{with secret "secret/data/http-echo"}}{{.Data.data.PASSWORD}}{{end}}"
 EOH
-  				destination = "secrets/file.env"
-  				env         = true
-			}
+          destination = "secrets/file.env"
+          env         = true
+      }
     }
   }
 }

@@ -1,13 +1,13 @@
 job "http-echo"{
     datacenters = ["dc1"]
     group "http-echo"{
-        count = "5"
+        count = "2"
         task "http-echo"{
             driver = "exec"
             config {
                 command = "http-echo"
                 args = [
-                    "-text", "Hello from vagrant ${NOMAD_ALLOC_INDEX}. The password is ${PASSWORD}", 
+                    "-text", "<h1>Hello from vagrant ${NOMAD_ALLOC_INDEX}. The password is ${PASSWORD}</h1>",
                     "-listen", "${NOMAD_ADDR_http}"
                 ]
             }
