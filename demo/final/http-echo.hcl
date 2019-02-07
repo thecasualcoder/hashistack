@@ -19,7 +19,7 @@ job "http-echo" {
         	"-text",
           "Instance: ${NOMAD_ALLOC_INDEX} IP: ${NOMAD_ADDR_http} VERSION: ${NOMAD_META_VERSION} PASSWORD: ${PASSWORD}",
           "-listen",
-          "0.0.0.0:${NOMAD_PORT_http}"
+          "${NOMAD_ADDR_http}"
         ]
       }
 
@@ -54,12 +54,8 @@ job "http-echo" {
 
 			template {
   				data = <<EOH
-# Lines starting with a # are ignored
-
-# Empty lines are also ignored
 PASSWORD="{{with secret "secret/data/http-echo"}}{{.Data.data.PASSWORD}}{{end}}"
 EOH
-
   				destination = "secrets/file.env"
   				env         = true
 			}
