@@ -1,30 +1,35 @@
 job "http-echo" {
-    datacenters = ["dc1"]
-    type = "service"
-    update {
-        max_parallel = 1
-    }
+  datacenters = ["dc1"]
+  type = "service"
+  
+	update {
+    max_parallel = 1
+  }
 
-    group "http-echo" {
-        count = 2
-        task "http-echo" {
-            driver = "exec"
-            config {
-                command = "http-echo"
-                args = [
-                    "-text",
-                    "Instance: ${NOMAD_ALLOC_INDEX} IP: ${NOMAD_ADDR_http} VERSION: ${NOMAD_META_VERSION} PASSWORD: ${PASSWORD}",
-                    "-listen",
-                    "0.0.0.0:${NOMAD_PORT_http}"
-                ]
-            }
+  group "http-echo" {
+    count = 2
+    
+		task "http-echo" {
+      
+			driver = "exec"
+      
+			config {
+        command = "http-echo"
+        args = [
+        	"-text",
+          "Instance: ${NOMAD_ALLOC_INDEX} IP: ${NOMAD_ADDR_http} VERSION: ${NOMAD_META_VERSION} PASSWORD: ${PASSWORD}",
+          "-listen",
+          "0.0.0.0:${NOMAD_PORT_http}"
+        ]
+      }
 
-            resources {
-                memory = 200
-                network {
-                    port "http" {}
-                }
-            }
+    	resources {
+      	memory = 200
+
+				network {
+      		port "http" {}
+      	}
+    	}
 
 			service {
 				port = "http"
@@ -57,7 +62,7 @@ EOH
 
   				destination = "secrets/file.env"
   				env         = true
-}
-        }
+			}
     }
+  }
 }

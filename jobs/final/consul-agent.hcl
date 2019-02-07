@@ -1,9 +1,14 @@
 job "consul-agent" {
+
 	datacenters = ["dc1"]
 	type = "system"
+	
 	group "consul-agent" {
+	
 		task "consul-agent" {
+	
 			driver = "exec"
+	
 			config {
 				command = "consul"
 				args = [
@@ -17,7 +22,9 @@ job "consul-agent" {
 			}
 
 			resources {
+			
 				memory = 128
+			
 				network {
 					port "http" {
 						static = 8500
