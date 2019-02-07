@@ -23,6 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "systems" do |node|
     node.vm.hostname = "systems"
     node.vm.network "private_network", ip: "192.168.1.200"
-    node.vm.provision :shell, inline: "echo 'Hello from systems'"
+    node.vm.provision "consul-server", type: "shell", path: "./scripts/consul-server.sh"
   end
 end
