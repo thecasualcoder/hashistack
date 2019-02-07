@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.provision :shell, inline: "echo 'Hello World!'"
   config.vm.provision "basic", type: "shell", path: "./scripts/basic.sh"
-  config.vm.provision "docker", type: "shell", path: "./scripts/docker.sh"
+  # config.vm.provision "docker", type: "shell", path: "./scripts/docker.sh"
   config.vm.provision "hashistack", type: "shell", path: "./scripts/hashistack.sh"
 
   NUM_OF_NODES.times do |i|
