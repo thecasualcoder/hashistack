@@ -73,8 +73,7 @@ sudo vault server -dev -dev-listen-address=192.168.1.200:8200
 open http://192.168.1.200:8200
 ```
 
-What to do?
-
+What is covered?
 - Create a secret
 - Create a policy for the secret
 
@@ -96,3 +95,11 @@ What to do?
 ```
 
 ## 4. Run new job with vault policy configured
+
+# Section 3
+
+## 1. Allow traffic
+
+What is covered?
+- Consul for service discovery
+- Fabio for consul aware web server
