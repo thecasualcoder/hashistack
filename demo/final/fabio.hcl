@@ -17,11 +17,10 @@ job "fabio" {
         command = "./fabio"
         
 				args = [
-					"-proxy.addr",
-          "${NOMAD_ADDR_proxy}",
-					"-ui.addr",
-					"${NOMAD_ADDR_ui}",
-					"-registry.consul.register.enabled=false"
+					"-proxy.addr=${NOMAD_ADDR_proxy}",
+					"-ui.addr=${NOMAD_ADDR_ui}",
+					"-registry.consul.register.enabled=false",
+					"-proxy.strategy=rr"
 				]
 			}
 
