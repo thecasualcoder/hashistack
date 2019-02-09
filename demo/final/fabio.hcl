@@ -32,7 +32,7 @@ job "fabio" {
 			}
 
 			service {
-				name = "fabio"
+				name = "api-gateway"
 				port = "proxy"
 
 				check {

@@ -40,7 +40,7 @@ job "http-echo" {
         name = "http-echo"
 
         tags = [
-          "urlprefix-http-echo.service.consul/",
+          "urlprefix-http-echo.service.consul:8080/",
           "urlprefix-/http-echo strip=/http-echo"
         ]
 
