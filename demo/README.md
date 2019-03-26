@@ -14,12 +14,7 @@ open http://192.168.1.100:8080
 
 ```bash
 #vagrant ssh node0
-sudo nomad agent \
-    -server -client \
-    -data-dir /data/nomad \
-    -bootstrap-expect 1 \
-    -bind 192.168.1.100 \
-    -network-interface enp0s8
+sudo nomad agent -config config/nomad-server.hcl
 ```
 
 ## 3. Access nomad UI
@@ -50,12 +45,7 @@ What is covered?
 
 ```bash
 #vagrant ssh node1
-sudo nomad agent \
-    -client \
-    -data-dir /data/nomad \
-    -servers=192.168.1.100 \
-    -bind=192.168.1.101 \
-    -network-interface enp0s8
+sudo nomad agent -config config/nomad-client-1.hcl
 ```
 
 # Section 2
