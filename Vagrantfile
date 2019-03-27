@@ -25,5 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.network "private_network", ip: "192.168.1.200"
     node.vm.provision "consul-server", type: "shell", path: "./scripts/consul-server.sh"
     node.vm.provision "vault-server", type: "shell", path: "./scripts/vault-server.sh"
+    node.vm.provision "traefik", type: "shell", path: "./scripts/traefik.sh"
   end
 end
