@@ -39,11 +39,6 @@ job "http-echo" {
         port = "http"
         name = "http-echo"
 
-        tags = [
-          "urlprefix-http-echo.service.consul:8080/",
-          "urlprefix-/http-echo strip=/http-echo"
-        ]
-
         check {
           type = "http"
           path = "/health"
