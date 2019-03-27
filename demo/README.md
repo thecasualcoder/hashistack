@@ -67,23 +67,6 @@ What is covered?
 - Create a secret
 - Create a policy for the secret
 
-## 3. Configure nomad to be vault aware
-
-
-```bash
-# vagrant ssh node0
-# Stop nomad and add these flags to existing command
--vault-enabled \
--vault-address=http://192.168.1.200:8200 \
--vault-token=${VAULT_TOKEN}
-
-# vagrant ssh node1
-# Stop nomad and add these flags to existing command
--vault-enabled \
--vault-address=http://192.168.1.200:8200 \
--vault-token=${VAULT_TOKEN}
-```
-
 ## 4. Run new job with vault policy configured
 
 # Section 3
@@ -92,4 +75,4 @@ What is covered?
 
 What is covered?
 - Consul for service discovery
-- Fabio for consul aware web server
+- Traefik for consul aware web server
