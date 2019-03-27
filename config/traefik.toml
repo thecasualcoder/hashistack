@@ -1,0 +1,16 @@
+################################################################
+# Consul Catalog configuration backend
+################################################################
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+# Enable web configuration backend
+[web]
+address = ":7081"
+
+# Enable Consul Catalog configuration backend
+[consulCatalog]
+endpoint = "192.168.1.200:8500"
+domain = "consul.localhost"
